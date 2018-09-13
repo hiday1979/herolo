@@ -1,0 +1,87 @@
+<div class="container">
+<div class="list-type5">
+  <ol>
+  <li *ngFor="let book of bookList"><a href="#"></a>
+    <div class="item" >{{book.title | titlecase}}</div>
+    <div class="item"> <span *ngFor="let name of book.authors">{{name}}</span></div>
+    <div class="item">{{book.publishedDate}}</div>
+
+    <div class="btnDiv">
+      <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#squarespaceModal" (click)="putDetailsInModel(book.id)">
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+      </button>
+      <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="putBookName(book.title, book.id)">
+        <span class="glyphicon glyphicon-remove"></span> Remove
+      </button>
+    </div>
+  </li>
+  </ol>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+          <h3 class="modal-title" id="lineModalLabel">Edit book details</h3>
+          <h6 id="alertMassege" class= "alert"></h6>
+        </div>
+        <div class="modal-body">
+          <form>
+                  <div class="form-group">
+                      <div class="btn-group btn-delete hidden" role="group" id="BookID">
+
+                      </div>
+                    <label for="modelTitle">Title</label>
+                    <input type="text" class="form-control" id="modelTitle" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="modelAuthor">Author</label>
+                    <input type="text" class="form-control" id="modelAuthor" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label for="modelPublishedDate">Published date</label>
+                    <input type="date" class="form-control" id="modelPublishedDate" placeholder="">
+                  </div>
+                </form>
+
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
+            </div>
+
+            <div class="btn-group" role="group">
+              <button type="button" id="saveBook" class="btn btn-default btn-hover-green"  data-action="save" role="button" (click)="saveBook()" >Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+    <!--  -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete this book</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete {{bookName}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteBook()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
