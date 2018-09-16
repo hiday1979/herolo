@@ -6,11 +6,10 @@ const api = require('./server/routes/api');
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static(path.join(__dirname ,'dist')));
+app.use(express.static(path.join(__dirname + 'dist')));
 
-app.get('*', (req,res)=> {
-
-res.sendFile(path.join(__dirname+'/dist/index.html'));
+app.get('/*',function (req,res) {
+res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 const port = process.env.PORT || 8080;
 app.set('port', port);
