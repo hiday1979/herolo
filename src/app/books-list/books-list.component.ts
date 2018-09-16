@@ -16,6 +16,7 @@ export class BooksListComponent implements OnInit, AfterViewChecked {
   bookList = Array<Book>();
   id: number;
   bookName: string;
+  fromNewBook = false;
 
 
   constructor(private data: GetBooksListService) { }
@@ -48,6 +49,11 @@ export class BooksListComponent implements OnInit, AfterViewChecked {
       if (this.checkForBookTitle(bookTitle)) {
         document.getElementById('alertMassege').innerHTML = 'There can be only one....';
       } else if ( bookTitle !== '' && bookAuthor !== '' && bookDate !== '') {
+        if (this.fromNewBook) {
+          this.bookList.push(new Book(this.bookList.length + 1, bookTitle, [bookAuthor], bookDate));
+          this.fromNewBook = false;
+          $('#squarespaceModal').modal('hide');
+        } else {
       this.bookList[this.id].title = title.value;
       this.bookList[this.id].authors.length = 0;
       this.bookList[this.id].authors.push(author.value);
@@ -56,6 +62,7 @@ export class BooksListComponent implements OnInit, AfterViewChecked {
       author.value = '';
       date.value = '';
       $('#squarespaceModal').modal('hide');
+        }
       } else {
         document.getElementById('alertMassege').innerHTML = 'One or more of the filds are empty';
       }
@@ -82,5 +89,9 @@ export class BooksListComponent implements OnInit, AfterViewChecked {
         }
      }
      return match;
+    }
+
+    fromNew() {
+        this.fromNewBook = true;
     }
 }

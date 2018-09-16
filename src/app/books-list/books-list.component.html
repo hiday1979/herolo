@@ -1,5 +1,9 @@
 <div class="container">
 <div class="list-type5">
+  <div>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#squarespaceModal" (click)="fromNew()">Add new Book</button>
+  </div>
+  <br>
   <ol>
   <li *ngFor="let book of bookList"><a href="#"></a>
     <div class="item" >{{book.title | titlecase}}</div>
