@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BooksListComponent } from './books-list/books-list.component';
-import { MatDialogModule} from '@angular/material';
+
 
 
 
@@ -16,8 +16,7 @@ import { MatDialogModule} from '@angular/material';
   imports: [
     BrowserModule,
     HttpModule,
-    HttpClientModule,
-    MatDialogModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
