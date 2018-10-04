@@ -34,24 +34,23 @@ export class BooksListComponent implements OnInit, AfterViewChecked {
       const title = <HTMLInputElement> document.getElementById('modelTitle');
       const author = <HTMLInputElement> document.getElementById('modelAuthor');
       const date = <HTMLInputElement> document.getElementById('modelPublishedDate');
-      title.placeholder = this.bookList[id].title;
-      author.placeholder = this.bookList[id].authors[0];
-      date.placeholder = this.bookList[id].publishedDate;
+      title.value = this.bookList[id].title;
+      author.value = this.bookList[id].authors[0];
+      date.value = this.bookList[id].publishedDate;
     }
 
-    saveBook() {
+    saveBook(fromNewBook: boolean) {
       const title = <HTMLInputElement> document.getElementById('modelTitle');
       const author = <HTMLInputElement> document.getElementById('modelAuthor');
       const date = <HTMLInputElement> document.getElementById('modelPublishedDate');
-      const bookTitle = title.value;
-      const bookAuthor = author.value;
-      const bookDate = date.value;
+      const bookTitle = title.value.replace(/[^a-zA-Z0-9 ]/g, '');
+      const bookAuthor = author.value.replace(/[^a-zA-Z0-9 ]/g, '');
+      const bookDate = date.value.replace(/[^a-zA-Z0-9 ]/g, '');
       if (this.checkForBookTitle(bookTitle)) {
         document.getElementById('alertMassege').innerHTML = 'There can be only one....';
       } else if ( bookTitle !== '' && bookAuthor !== '' && bookDate !== '') {
-        if (this.fromNewBook) {
+        if (fromNewBook) {
           this.bookList.push(new Book(this.bookList.length + 1, bookTitle, [bookAuthor], bookDate));
-          this.fromNewBook = false;
           $('#squarespaceModal').modal('hide');
         } else {
       this.bookList[this.id].title = title.value;
@@ -89,9 +88,5 @@ export class BooksListComponent implements OnInit, AfterViewChecked {
         }
      }
      return match;
-    }
-
-    fromNew() {
-        this.fromNewBook = true;
     }
 }
